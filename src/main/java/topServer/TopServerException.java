@@ -11,9 +11,4 @@ public class TopServerException extends Exception {
 	public TopServerException(String des) {
 		super(des);
 	}
-	
-	@Override
-	public String toString() {
-		return super.getLocalizedMessage();
-	}
 }

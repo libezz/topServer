@@ -14,10 +14,17 @@ public class MainController {
 	@Autowired
 	private MainService mainService;
 
-	@RequestMapping("/test")
-	public BaseResult getTest() {
+	@RequestMapping("/**")
+	public BaseResult getMissing() {
 		BaseResult result = new BaseResult();
 		mainService.setResultDes(result, ResultStatusType.MISSING);
+		return result;
+	}
+	
+	@RequestMapping("/")
+	public BaseResult getTest() {
+		BaseResult result = new BaseResult();
+		mainService.setResultDes(result);
 		return result;
 	}
 }

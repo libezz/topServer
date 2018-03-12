@@ -1,13 +1,11 @@
 package topServer.param;
 
-import org.springframework.data.domain.Sort.Direction;
+public class PageParam extends BaseParam {
 
-public class PageParam {
-
-	private int page = 1;
-	private int size = 10;
-	private Direction sortDir = Direction.DESC;
-	private String sortBy = "id";
+	private int page;
+	private int size;
+	private int sortDir;
+	private int sortBy;
 	
 	public int getPage() {
 		return page;
@@ -21,16 +19,16 @@ public class PageParam {
 	public void setSize(int size) {
 		this.size = size;
 	}
-	public Direction getSortDir() {
+	public int getSortDir() {
 		return sortDir;
 	}
-	public void setSortDir(Direction sortDir) {
+	public void setSortDir(int sortDir) {
 		this.sortDir = sortDir;
 	}
-	public String getSortBy() {
+	public int getSortBy() {
 		return sortBy;
 	}
-	public void setSortBy(String sortBy) {
+	public void setSortBy(int sortBy) {
 		this.sortBy = sortBy;
 	}
 }

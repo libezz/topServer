@@ -5,13 +5,15 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import topServer.TopServerException;
 import topServer.param.PageParam;
 import topServer.result.BaseResult;
 import topServer.type.ResultStatusType;
+import topServer.type.SortByType;
+import topServer.type.SortDirType;
 import topServer.utils.IpUtils;
 
 public class BaseService {
@@ -28,10 +30,18 @@ public class BaseService {
 		return IpUtils.getIp(getRequest());
 	}
 	
-	public Pageable checkPage(PageParam param) {
-		
-		Sort sort = new Sort(param.getSortDir(), param.getSortBy());
-		return PageRequest.of(param.getPage(), param.getSize(), sort);
+	public Pageable checkPage(PageParam param) throws TopServerException {
+		int page = param.getPage();
+		int size = param.getSize();
+		if(page < 0 || size <= 0) {
+			throw new TopServerException("分页参数异常");
+		}
+		SortDirType sortDir = SortDirType.getType(param.getSortDir());
+		SortByType sortBy = SortByType.getType(param.getSortBy());
+		if(sortDir == null || sortBy == null) {
+			throw new TopServerException("排序参数异常");
+		}
+		return  PageRequest.of(page, size, sortDir.getSortDir(), sortBy.getSortBy());
 	}
 	
 	public boolean setResultDes(BaseResult result, ResultStatusType type, String des) {
