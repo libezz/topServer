@@ -13,8 +13,8 @@ public class TopServerConfigurer extends WebMvcConfigurerAdapter {
 	private RefererInterceptor refererInterceptor;
 	
 	@Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(refererInterceptor).addPathPatterns("/**");
-        super.addInterceptors(registry);
-    }
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(refererInterceptor).addPathPatterns("/**");
+		super.addInterceptors(registry);
+	}
 }
