@@ -3,9 +3,8 @@ package topServer.type;
 public enum ResultStatusType {
 
 	SUCCEED(0, "请求成功"),
-	MISSING(1, "路径失效"),
-	THROW(2, "参数异常"),
-	EXCEPTION(3, "系统繁忙");
+	THROW(1, "参数异常"),
+	EXCEPTION(2, "系统繁忙");
 	
 	private int value;
 	private String name;

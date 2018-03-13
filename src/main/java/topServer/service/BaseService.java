@@ -1,25 +1,36 @@
 package topServer.service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import topServer.TopServerException;
 import topServer.param.PageParam;
 import topServer.result.BaseResult;
+import topServer.system.TopServerException;
 import topServer.type.ResultStatusType;
 import topServer.type.SortByType;
 import topServer.type.SortDirType;
 import topServer.utils.IpUtils;
 
+@Service
 public class BaseService {
 
 	public HttpServletRequest getRequest() {
 		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+	}
+	
+	public HttpServletResponse getResponse() {
+		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
+	}
+	
+	public String getURI() {
+		return getRequest().getRequestURI();
 	}
 	
 	public HttpSession getSession() {

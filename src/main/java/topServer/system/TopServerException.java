@@ -1,4 +1,4 @@
-package topServer;
+package topServer.system;
 
 public class TopServerException extends Exception {
 

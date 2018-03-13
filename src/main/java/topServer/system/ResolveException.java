@@ -1,6 +1,4 @@
-package topServer;
-
-import javax.servlet.http.HttpServletRequest;
+package topServer.system;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,9 +23,8 @@ public class ResolveException {
 	public BaseResult resolveTopServerException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.THROW, e.getMessage());
-		HttpServletRequest request = baseService.getRequest();
 		logger.warn("=======>{}<=======", ResultStatusType.THROW.getName());
-		logger.warn("remoteIp:{}, URI:{}, exception:{}", baseService.getIp(), request.getRequestURI(), e.getMessage());
+		logger.warn("remoteIp:{}, URI:{}, exception:{}", baseService.getIp(), baseService.getURI(), e.getMessage());
 		return result;
 	}
 	
@@ -36,9 +33,8 @@ public class ResolveException {
 	public BaseResult resolveException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.EXCEPTION);
-		HttpServletRequest request = baseService.getRequest();
 		logger.warn("=======>{}<=======", e.getClass().getName());
-		logger.warn("remoteIp:{}, URI:{}, exception:{}", baseService.getIp(), request.getRequestURI(), e.getMessage());
+		logger.warn("remoteIp:{}, URI:{}, exception:{}", baseService.getIp(), baseService.getURI(), e.getMessage());
 		return result;
 	}
 }
