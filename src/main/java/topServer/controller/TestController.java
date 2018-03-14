@@ -1,21 +1,35 @@
 package topServer.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class TestController {
+import topServer.result.BaseResult;
+import topServer.service.BaseService;
+import topServer.system.TopServerException;
 
-	@RequestMapping("/to{test}")
-	public String getTest(@PathVariable String test, HttpServletRequest request) {
-		String text = request.getParameter("text");
-		if(StringUtils.isNotBlank(text)) {
-			return text;
-		}
-		return test;
+@RestController
+@RequestMapping("/test")
+public class TestController extends BaseController {
+
+	@Autowired
+	private BaseService baseService;
+	
+	@RequestMapping("/getTest")
+	public BaseResult getTest() {
+		BaseResult result = new BaseResult();
+		baseService.setResultDes(result);
+		return result;
+	}
+	
+	@RequestMapping("/getTSException")
+	public void getTSException() throws TopServerException {
+		throw new TopServerException("TopServerException");
+	}
+	
+	@RequestMapping("/getException")
+	public void getException() {
+		int index = 0;
+		index = 100 / index;
 	}
 }

@@ -18,12 +18,21 @@ public class ResolveException {
 	@Autowired
 	private BaseService baseService;
 	
+	@ExceptionHandler(TopServerMissing.class)
+	@ResponseBody
+	public BaseResult resolveTopServerMissing(Exception e) {
+		BaseResult result = new BaseResult();
+		baseService.setResultDes(result, ResultStatusType.MISSING);
+		logger.warn("【missing】:{}=>{}", baseService.getIP(), baseService.getURI());
+		return result;
+	}
+	
 	@ExceptionHandler(TopServerException.class)
 	@ResponseBody
 	public BaseResult resolveTopServerException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.THROW, e.getMessage());
-		logger.warn("【{}】:{}=>{}", e.getMessage(), baseService.getIp(), baseService.getURI());
+		logger.warn("【{}】:{}=>{}", e.getMessage(), baseService.getIP(), baseService.getURI());
 		return result;
 	}
 	
@@ -32,7 +41,7 @@ public class ResolveException {
 	public BaseResult resolveException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.EXCEPTION);
-		logger.warn("【{}】:{}=>{}, {}", e.getClass().getName(), baseService.getIp(), baseService.getURI(), e.getMessage());
+		logger.warn("【{}】:{}=>{}, {}", e.getClass().getName(), baseService.getIP(), baseService.getURI(), e.getMessage());
 		return result;
 	}
 }

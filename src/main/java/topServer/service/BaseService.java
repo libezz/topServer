@@ -16,7 +16,7 @@ import topServer.system.TopServerException;
 import topServer.type.ResultStatusType;
 import topServer.type.SortByType;
 import topServer.type.SortDirType;
-import topServer.utils.IpUtils;
+import topServer.utils.IPUtils;
 
 @Service
 public class BaseService {
@@ -45,12 +45,12 @@ public class BaseService {
 		return getSession(getRequest());
 	}
 	
-	public String getIp(HttpServletRequest request) {
-		return IpUtils.getIp(request);
+	public String getIP(HttpServletRequest request) {
+		return IPUtils.getIP(request);
 	}
 	
-	public String getIp() {
-		return getIp(getRequest());
+	public String getIP() {
+		return getIP(getRequest());
 	}
 	
 	public Pageable checkPage(PageParam param) throws TopServerException {

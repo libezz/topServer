@@ -2,7 +2,9 @@ package topServer.type;
 
 public enum SortByType {
 
-	ID(0, "id");
+	ID(0, "id"),
+	CREATE_DATE(1, "create_date"),
+	LAST_MODIFIED_DATE(2, "last_modified_date");
 	
 	private int value;
 	private String sortBy;

@@ -2,9 +2,9 @@ package topServer.utils;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class IpUtils {
+public class IPUtils {
 
-	public static String getIp(HttpServletRequest request) {
+	public static String getIP(HttpServletRequest request) {
 		if(request == null) {
 			return null;
 		}
