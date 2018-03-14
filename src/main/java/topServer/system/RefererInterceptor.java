@@ -23,9 +23,9 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		String uri = baseService.getURI();
+		String uri = baseService.getURI(request);
 		if("/index.html".equals(uri) || "/".equals(uri)) {
-			logRequest();
+			logger.warn("request:{}=>/", baseService.getIp(request));
 			return true;
 		}
 		String referer = request.getHeader("referer");
@@ -34,17 +34,20 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}
 		String refHost = new URL(referer).getHost();
-		String reqHost = new URL(request.getRequestURL().toString()).getHost();
+		String reqHost = request.getServerName();
 		if(reqHost.equals(refHost)) {
-			logRequest();
+			if(isNotFilte(uri)) {
+				logger.warn("request:{}=>{}", baseService.getIp(request), uri);
+			}
 			return true;
 		} else {
+			logger.warn("redirect:{} from {}", baseService.getIp(request), referer);
 			response.sendRedirect("/");
 			return false;
 		}
 	}
 	
-	public void logRequest() {
-		logger.warn("remoteIp:{}, URI:{}", baseService.getIp(), baseService.getURI());
+	private boolean isNotFilte(String uri) {
+		return true;
 	}
 }

@@ -29,16 +29,28 @@ public class BaseService {
 		return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
 	}
 	
+	public String getURI(HttpServletRequest request) {
+		return request.getRequestURI();
+	}
+	
 	public String getURI() {
-		return getRequest().getRequestURI();
+		return getURI(getRequest());
+	}
+	
+	public HttpSession getSession(HttpServletRequest request) {
+		return request.getSession();
 	}
 	
 	public HttpSession getSession() {
-		return getRequest().getSession();
+		return getSession(getRequest());
+	}
+	
+	public String getIp(HttpServletRequest request) {
+		return IpUtils.getIp(request);
 	}
 	
 	public String getIp() {
-		return IpUtils.getIp(getRequest());
+		return getIp(getRequest());
 	}
 	
 	public Pageable checkPage(PageParam param) throws TopServerException {
