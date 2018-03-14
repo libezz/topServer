@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import topServer.service.BaseService;
+import topServer.type.LogFilteType;
 
 @Component
 public class RefererInterceptor extends HandlerInterceptorAdapter {
@@ -25,7 +26,7 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String uri = baseService.getURI(request);
 		if("/index.html".equals(uri) || "/".equals(uri)) {
-			logger.warn("request:{}=>/", baseService.getIp(request));
+			logger.warn("【request】:{}=>/", baseService.getIp(request));
 			return true;
 		}
 		String referer = request.getHeader("referer");
@@ -37,17 +38,22 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 		String reqHost = request.getServerName();
 		if(reqHost.equals(refHost)) {
 			if(isNotFilte(uri)) {
-				logger.warn("request:{}=>{}", baseService.getIp(request), uri);
+				logger.warn("【request】:{}=>{}", baseService.getIp(request), uri);
 			}
 			return true;
 		} else {
-			logger.warn("redirect:{} from {}", baseService.getIp(request), referer);
+			logger.warn("【redirect】:{} from {}", baseService.getIp(request), referer);
 			response.sendRedirect("/");
 			return false;
 		}
 	}
 	
 	private boolean isNotFilte(String uri) {
+		for(LogFilteType type : LogFilteType.values()) {
+			if(uri.startsWith(type.getFilte())) {
+				return false;
+			}
+		}
 		return true;
 	}
 }

@@ -23,7 +23,7 @@ public class ResolveException {
 	public BaseResult resolveTopServerException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.THROW, e.getMessage());
-		logger.warn("{}:{}=>{}", e.getMessage(), baseService.getIp(), baseService.getURI());
+		logger.warn("【{}】:{}=>{}", e.getMessage(), baseService.getIp(), baseService.getURI());
 		return result;
 	}
 	
@@ -32,7 +32,7 @@ public class ResolveException {
 	public BaseResult resolveException(Exception e) {
 		BaseResult result = new BaseResult();
 		baseService.setResultDes(result, ResultStatusType.EXCEPTION);
-		logger.warn("{}:{}=>{}, {}", e.getClass().getName(), baseService.getIp(), baseService.getURI(), e.getMessage());
+		logger.warn("【{}】:{}=>{}, {}", e.getClass().getName(), baseService.getIp(), baseService.getURI(), e.getMessage());
 		return result;
 	}
 }

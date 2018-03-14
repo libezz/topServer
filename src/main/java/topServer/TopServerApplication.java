@@ -19,6 +19,6 @@ public class TopServerApplication {
 	
 	@PostConstruct
 	public void postConstruct() {
-		logger.warn("=================server start=================");
+		logger.warn("=================【server start】=================");
 	}
 }
