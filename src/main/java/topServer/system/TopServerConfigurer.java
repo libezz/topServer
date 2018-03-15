@@ -13,11 +13,14 @@ public class TopServerConfigurer extends WebMvcConfigurerAdapter {
 	private RefererInterceptor refererInterceptor;
 	@Autowired
 	private LoggingInterceptor loggingInterceptor;
+	@Autowired
+	private RolesInterceptor rolesInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(refererInterceptor).addPathPatterns("/**");
 		registry.addInterceptor(loggingInterceptor).addPathPatterns("/**");
+		registry.addInterceptor(rolesInterceptor).addPathPatterns("/**");
 		super.addInterceptors(registry);
 	}
 }

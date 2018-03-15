@@ -1,23 +1,27 @@
 package topServer.type;
 
+import topServer.global.UserRole;
+
 public enum URIGroupType {
 
-	MAIN(0, "index.html", false),
-	DEFAULT(1, "default", true),
-	HTML(101, "html", false),
-	JS(102, "js", true),
-	CSS(103, "css", true),
-	IMG(201, "img", true),
-	TEST(301, "test", false);
+	MAIN(0, "index.html", false, null),
+	DEFAULT(1, "default", true, null),
+	HTML(101, "html", true, null),
+	JS(102, "js", true, null),
+	CSS(103, "css", true, null),
+	IMG(104, "img", true, null),
+	USER(201, "user", false, UserRole.SIGN_IN);
 	
 	private int value;
 	private String name;
 	private boolean logFilte;
+	private Long needRole;
 	
-	private URIGroupType(int value, String name, boolean logFilte) {
+	private URIGroupType(int value, String name, boolean logFilte, Long needRole) {
 		this.value = value;
 		this.name = name;
 		this.logFilte = logFilte;
+		this.needRole = needRole;
 	}
 	
 	public static URIGroupType getTypeByName(String name) {
@@ -46,5 +50,11 @@ public enum URIGroupType {
 	}
 	public void setLogFilte(boolean logFilte) {
 		this.logFilte = logFilte;
+	}
+	public Long getNeedRole() {
+		return needRole;
+	}
+	public void setNeedRole(Long needRole) {
+		this.needRole = needRole;
 	}
 }

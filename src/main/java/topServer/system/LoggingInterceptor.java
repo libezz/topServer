@@ -25,8 +25,7 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
 		String uri = defaultService.getURI(request);
 		URIGroupType group = URIUtils.groupURI(uri);
 		if(group == null) {
-			logger.warn("【farword】:{}<={}", defaultService.getIP(), uri);
-			request.getRequestDispatcher("/default").forward(request, response);
+			request.getRequestDispatcher("/default" + uri).forward(request, response);
 			return false;
 		}
 		if(!group.isLogFilte()) {
