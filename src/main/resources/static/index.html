@@ -2,23 +2,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<style type="text/css">
+body {text-align:center;}
+</style>
+<script type="text/javascript">
+function adaptHeight(iframe) {
+	var textHeight = iframe.contentWindow.document.body.offsetHeight;
+	var seenHeight = window.innerHeight * 0.95;
+	iframe.height = 0;
+	iframe.height = textHeight > seenHeight ? textHeight : seenHeight;
+}
+</script>
+<title>ZZzone</title>
 </head>
 <body>
-<div>index.html</div>
-<button onclick="top.iframe.location.href='/'">/</button>
-<button onclick="top.iframe.location.href='//123'">//123</button>
-<button onclick="top.iframe.location.href='/index.html'">/index.html</button>
-<button onclick="top.iframe.location.href='/index.html//123'">/index.html//123</button>
-<button onclick="top.iframe.location.href='/index.html/123'">/index.html/123</button>
-<button onclick="top.iframe.location.href='/test'">/test</button>
-<button onclick="top.iframe.location.href='/get'">/get</button>
-<button onclick="top.iframe.location.href='/test/getTest'">/test/getTest</button>
-<button onclick="top.iframe.location.href='/test/get'">/test/get</button>
-<button onclick="top.iframe.location.href='/test/get/get'">/test/get/get</button>
-<button onclick="top.iframe.location.href='/test/getTSException'">/test/getTSException</button>
-<button onclick="top.iframe.location.href='/test/getException'">/test/getException</button>
-<div></div>
-<iframe name="iframe"></iframe>
+<iframe name="menu" src="/html/menu.html" onload="adaptHeight(this)" style="width:20%;position:fixed;left:0;"></iframe>
+<iframe name="show" src="/html/show.html" onload="adaptHeight(this)" style="width:20%;position:fixed;right:0;"></iframe>
+<iframe name="main" src="/html/main.html" onload="adaptHeight(this)" style="width:60%;"></iframe>
 </body>
 </html>
