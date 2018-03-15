@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import topServer.service.BaseService;
+import topServer.service.DefaultService;
 import topServer.type.URIGroupType;
 
 @Component
@@ -20,11 +20,11 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private BaseService baseService;
+	private DefaultService defaultService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		String uri = baseService.getURI(request);
+		String uri = defaultService.getURI(request);
 		if(("/" + URIGroupType.MAIN.getName()).equals(uri)) {
 			return true;
 		}
@@ -38,7 +38,7 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 		if(reqHost.equals(refHost)) {
 			return true;
 		}
-		logger.warn("【redirect】:{}<={}", baseService.getIP(request), referer);
+		logger.warn("【redirect】:{}<={}", defaultService.getIP(request), referer);
 		response.sendRedirect("/");
 		return false;
 	}
