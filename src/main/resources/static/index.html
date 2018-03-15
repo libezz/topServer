@@ -6,6 +6,9 @@
 body {text-align:center;}
 </style>
 <script type="text/javascript">
+window.onload = function() {
+	top.menu.location.href = "/html/menu.html";
+}
 function adaptHeight(iframe) {
 	var textHeight = iframe.contentWindow.document.body.offsetHeight;
 	var seenHeight = window.innerHeight * 0.95;
@@ -16,8 +19,8 @@ function adaptHeight(iframe) {
 <title>ZZzone</title>
 </head>
 <body>
-<iframe name="menu" src="/html/menu.html" onload="adaptHeight(this)" style="width:20%;position:fixed;left:0;"></iframe>
-<iframe name="show" src="/html/show.html" onload="adaptHeight(this)" style="width:20%;position:fixed;right:0;"></iframe>
-<iframe name="main" src="/html/main.html" onload="adaptHeight(this)" style="width:60%;"></iframe>
+<iframe name="menu" onload="adaptHeight(this)" style="width:20%;position:fixed;left:0;"></iframe>
+<iframe name="show" onload="adaptHeight(this)" style="width:20%;position:fixed;right:0;"></iframe>
+<iframe name="main" onload="adaptHeight(this)" style="width:60%;"></iframe>
 </body>
 </html>
