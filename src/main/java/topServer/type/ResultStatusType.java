@@ -4,7 +4,7 @@ public enum ResultStatusType {
 
 	SUCCEED(0, "请求成功"),
 	MISSING(1, "路径失效"),
-	ROLES(2, "权限异常"),
+	UNROLE(2, "权限异常"),
 	THROW(3, "参数异常"),
 	EXCEPTION(4, "系统繁忙");
 	

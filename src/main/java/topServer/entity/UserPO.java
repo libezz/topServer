@@ -17,6 +17,8 @@ public class UserPO extends BasePO {
 	@Column(length = 25, nullable = false)
 	private String signIp;
 	@Column
+	private Integer signCount = 0;
+	@Column
 	private Long sumRole = 0L;
 	
 	public String getUsername() {
@@ -36,6 +38,12 @@ public class UserPO extends BasePO {
 	}
 	public void setSignIp(String signIp) {
 		this.signIp = signIp;
+	}
+	public Integer getSignCount() {
+		return signCount;
+	}
+	public void setSignCount(Integer signCount) {
+		this.signCount = signCount;
 	}
 	public Long getSumRole() {
 		return sumRole;

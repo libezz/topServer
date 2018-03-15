@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import topServer.result.BaseResult;
-import topServer.service.BaseService;
+import topServer.service.DefaultService;
 import topServer.type.ResultStatusType;
 
 @ControllerAdvice
@@ -16,23 +16,14 @@ public class ResolveException {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private BaseService baseService;
-	
-	@ExceptionHandler(TopServerMissing.class)
-	@ResponseBody
-	public BaseResult resolveTopServerMissing(Exception e) {
-		BaseResult result = new BaseResult();
-		baseService.setResultDes(result, ResultStatusType.MISSING);
-		logger.warn("【missing】:{}=>{}", baseService.getIP(), baseService.getURI());
-		return result;
-	}
+	private DefaultService defaultService;
 	
 	@ExceptionHandler(TopServerException.class)
 	@ResponseBody
 	public BaseResult resolveTopServerException(Exception e) {
 		BaseResult result = new BaseResult();
-		baseService.setResultDes(result, ResultStatusType.THROW, e.getMessage());
-		logger.warn("【{}】:{}=>{}", e.getMessage(), baseService.getIP(), baseService.getURI());
+		defaultService.setResultDes(result, ResultStatusType.THROW, e.getMessage());
+		logger.warn("【{}】:{}=>{}", e.getMessage(), defaultService.getIP(), defaultService.getURI());
 		return result;
 	}
 	
@@ -40,8 +31,8 @@ public class ResolveException {
 	@ResponseBody
 	public BaseResult resolveException(Exception e) {
 		BaseResult result = new BaseResult();
-		baseService.setResultDes(result, ResultStatusType.EXCEPTION);
-		logger.warn("【{}】:{}=>{}, {}", e.getClass().getName(), baseService.getIP(), baseService.getURI(), e.getMessage());
+		defaultService.setResultDes(result, ResultStatusType.EXCEPTION);
+		logger.warn("【{}】:{}=>{}, {}", e.getClass().getName(), defaultService.getIP(), defaultService.getURI(), e.getMessage());
 		return result;
 	}
 }

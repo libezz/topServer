@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -18,7 +17,6 @@ import topServer.type.SortByType;
 import topServer.type.SortDirType;
 import topServer.utils.IPUtils;
 
-@Service
 public class BaseService {
 
 	public HttpServletRequest getRequest() {

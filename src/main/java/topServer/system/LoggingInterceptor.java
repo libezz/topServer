@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import topServer.service.BaseService;
+import topServer.service.DefaultService;
 import topServer.type.URIGroupType;
 import topServer.utils.URIUtils;
 
@@ -18,19 +18,18 @@ public class LoggingInterceptor extends HandlerInterceptorAdapter {
 
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
-	private BaseService baseService;
+	private DefaultService defaultService;
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		String uri = baseService.getURI(request);
+		String uri = defaultService.getURI(request);
 		URIGroupType group = URIUtils.groupURI(uri);
 		if(group == null) {
-			logger.warn("【farword】:{}=>{}", baseService.getIP(), uri);
-			request.getRequestDispatcher("/default").forward(request, response);
+			request.getRequestDispatcher("/default" + uri).forward(request, response);
 			return false;
 		}
 		if(!group.isLogFilte()) {
-			logger.warn("【request】:{}=>{}", baseService.getIP(request), uri);
+			logger.warn("【request】:{}=>{}", defaultService.getIP(request), uri);
 		}
 		return true;
 	}
