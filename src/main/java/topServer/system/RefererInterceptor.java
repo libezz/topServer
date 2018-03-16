@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import topServer.service.DefaultService;
-import topServer.type.URIGroupType;
 
 @Component
 public class RefererInterceptor extends HandlerInterceptorAdapter {
@@ -25,7 +24,7 @@ public class RefererInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		String uri = defaultService.getURI(request);
-		if(("/" + URIGroupType.MAIN.getName()).equals(uri)) {
+		if("/index.html".equals(uri)) {
 			return true;
 		}
 		String referer = request.getHeader("referer");
